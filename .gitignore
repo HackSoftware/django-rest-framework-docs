@@ -8,6 +8,7 @@ env/
 demo/db.sqlite3
 dist/
 drfdocs.egg-info/
+demo/node_modules
 
 site/
 

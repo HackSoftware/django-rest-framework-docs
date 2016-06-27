@@ -35,7 +35,6 @@ var Response = React.createClass({
     var statusText = this.state.payload.statusText.toLowerCase();
     var statusCodeFirstChar = String(this.state.payload.status).charAt(0);
     var statusCodeClass = 'label status-code pull-right status-code-' + statusCodeFirstChar;
-
     return (
       <div>
         <h3>Response <span className={statusCodeClass}>{this.props.payload.status}</span></h3>

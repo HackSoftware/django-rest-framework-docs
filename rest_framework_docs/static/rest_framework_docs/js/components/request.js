@@ -92,10 +92,8 @@ var Request = React.createClass({
       data: data
     });
   },
-
   render: function () {
     var endpoint = this.state.endpoint;
-
     return (
       <div>
         <h3>Request</h3>

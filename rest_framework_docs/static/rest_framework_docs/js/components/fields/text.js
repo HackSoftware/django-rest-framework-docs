@@ -13,7 +13,6 @@ var FieldText = React.createClass({
 
   render: function () {
     var labelName = this.props.name.replace('_', ' ');
-
     return (
       <div className="form-group">
         <label
