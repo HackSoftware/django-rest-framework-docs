@@ -21,13 +21,13 @@ var LiveAPIEndpoints = React.createClass({
     ) : null;
   },
   get_parent: function(objectName){
-    var ind = objectName.indexOf('.')
+    var ind = objectName.indexOf('.');
     if(ind > -1)
         return objectName.substr(0, ind);
     return false
   },
   get_child: function(objectName){
-    var ind = objectName.indexOf('.')
+    var ind = objectName.indexOf('.');
     if(ind > -1)
         return objectName.substr(ind+1);
     return false
@@ -48,6 +48,23 @@ var LiveAPIEndpoints = React.createClass({
         }
     }
   },
+  createHashStructure: function(data) {
+
+    var dict_data = {};
+
+    var nested_dict = {};
+    var that = this;
+    data.forEach(function(obj, ind){
+        if(obj.sub_fields != null){
+            dict_data[obj.name] = that.createHashStructure(obj.sub_fields);
+        }
+        else {
+            dict_data[obj.name] = '';
+        }
+    })
+
+    return dict_data;
+  },
   makeRequest: function (event) {
     event.preventDefault();
     var self = this;
@@ -59,7 +76,6 @@ var LiveAPIEndpoints = React.createClass({
 
     var data = this.getData();
     this.nested_fields(data);
-
     // Now Make the Request
     APIRequest(request.selectedMethod, request.endpoint.path)
       .set(headers)

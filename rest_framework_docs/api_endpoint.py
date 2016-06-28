@@ -92,11 +92,14 @@ class ApiEndpoint(object):
         if hasattr(serializer, 'get_fields'):
             for key, field in serializer.get_fields().items():
                 sub_fields = self.__get_serializer_fields__(field) if isinstance(field, BaseSerializer) else None
+                choices = field.choices if(hasattr(field, 'choices')) else None
+
                 fields.append({
                     "name": key,
                     "type": str(field.__class__.__name__),
                     "sub_fields": sub_fields,
-                    "required": field.required
+                    "required": field.required,
+                    "choices": choices
                 })
             # FIXME:
             # Show more attibutes of `field`?
